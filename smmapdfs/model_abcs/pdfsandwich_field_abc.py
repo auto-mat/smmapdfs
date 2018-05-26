@@ -8,17 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from reportlab.lib.units import mm
 
-fields = {
-    _("Jméno"): (lambda ua: ua.name()),
-    _("Pravidelnost"): (lambda ua: intcomma(round(ua.get_frequency_percentage(), 2)) + '%'),
-    _("Újetych kilometrů"): (lambda ua: intcomma(round(ua.trip_length_total_rounded(), 2)) + " Km"),
-    _("Ušetřené oxidu uhličitého"): (lambda ua: intcomma(ua.get_emissions()["co2"]) + " CO2"),
-    _("Počet eko cest"): (lambda ua: intcomma(ua.get_rides_count_denorm)),
-    _("Pravidelnost týmu"): (lambda ua: (intcomma(round(ua.team.get_frequency_percentage(), 2)) + '%') if ua.team else ""),
-    _("Nazev týmu"): (lambda ua: ua.team.name if ua.team else ""),
-    _("Nazev firmy"): (lambda ua: ua.team.subsidiary.company.name if ua.team else ""),
-}
-
 
 class PdfSandwichFieldABC(models.Model):
     class Meta:

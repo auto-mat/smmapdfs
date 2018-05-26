@@ -19,6 +19,14 @@ class WinnerAdmin(ImportExportMixin, RelatedFieldAdmin):
     actions = smmapdfs.actions.pdfsandwich_actions(models.WinnerSandwich)
 
 
+@admin.register(models.Competition)
+class WinnerAdmin(ImportExportMixin, RelatedFieldAdmin):
+    list_display = (
+        'name',
+        'sandwich_type',
+    )
+
+
 @admin.register(models.Certificate)
 class CertificateAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (

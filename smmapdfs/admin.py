@@ -7,7 +7,7 @@ from import_export.admin import ImportExportMixin
 from related_admin import RelatedFieldAdmin
 
 
-from . import email
+from . import actions
 from . import models
 
 
@@ -18,7 +18,6 @@ class PdfSandwichTypeAdmin(ImportExportMixin, admin.ModelAdmin):
         'height',
         'width',
     )
-    actions = (email.send_celery,)
 
 
 class PdfSandwichFieldAdminMixin(ImportExportMixin, RelatedFieldAdmin):
@@ -29,6 +28,7 @@ class PdfSandwichFieldAdminMixin(ImportExportMixin, RelatedFieldAdmin):
         'pdfsandwich_type',
     )
     list_editable = ('x', 'y', 'pdfsandwich_type')
+
 
 @admin.register(models.PdfSandwichEmail)
 class PdfSandwichEmailAdmin(ImportExportMixin, RelatedFieldAdmin):
@@ -45,7 +45,7 @@ class PdfSandwichAdminMixin(ImportExportMixin, RelatedFieldAdmin):
         'sent_time',
     )
     actions = (
-        email.send,
+        actions.send_pdfsandwich,
     )
 
 
