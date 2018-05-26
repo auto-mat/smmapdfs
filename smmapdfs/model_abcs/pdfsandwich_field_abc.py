@@ -12,6 +12,10 @@ from reportlab.lib.units import mm
 class PdfSandwichFieldABC(models.Model):
     class Meta:
         abstract = True
+        def __new__(cls, clsname, bases, dct):
+            res = type.__new__(cls, clsname, bases, dct)
+            cls.field.choices = [(a, a) for a in cls.fields.keys()]
+            return res
 
     def __str__(self):
         return self.field

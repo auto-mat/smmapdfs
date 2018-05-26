@@ -44,7 +44,7 @@ class Winner(models.Model):
         return self.user.username
 
 class CertificateField(PdfSandwichFieldABC):
-    fields = {"name": (lambda w: w.user.username), "email": (lambda w: w.user.name)}
+    fields = {"name": (lambda w: w.user.username), "email": (lambda w: w.user.email)}
 
 
 class Certificate(PdfSandwichABC):
