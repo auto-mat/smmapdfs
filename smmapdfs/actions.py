@@ -1,11 +1,13 @@
-from . import email
 from celery import task
-from django.contrib.contenttypes.models import ContentType
-from .models import PdfSandwichType
 
+from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
-def make_pdfsandwich_action(modeladmin, request, queryset):
+from .models import PdfSandwichType
+from . import email
+
+def make_pdfsandwich(modeladmin, request, queryset):
     for obj in queryset:
         content_type = ContentType.objects.get_for_model(obj)
         if settings.SMMAPDFS_CELERY:
@@ -17,6 +19,8 @@ def make_pdfsandwich_action(modeladmin, request, queryset):
             content_type.model,
             obj.pk,
         )
+
+make_pdfsandwich.short_description = _("Make PDF Sandwich")
 
 @task()
 def make_pdfsandwich_task(app_label, obj_model, obj_pk):
@@ -42,6 +46,8 @@ def send_pdfsandwich(modeladmin, request, queryset):
         else:
             f = send_pdfsandwich_task
         f(content_type.app_label, content_type.model, sandwich.pk, base_url)
+
+send_pdfsandwich.short_description = _("Send PDF Sandwich")
 
 @task()
 def send_pdfsandwich_task(app_label, model, pk, base_url):

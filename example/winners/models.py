@@ -52,8 +52,6 @@ class Winner(models.Model):
         return self.user.username
 
     sandwich_model = Certificate
-    sandwich_field_model = CertificateField
-
     def get_sandwich_type(self):
         return self.competition.sandwich_type
 

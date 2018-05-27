@@ -38,7 +38,7 @@ class PdfSandwichABC(models.Model):
         temp = NamedTemporaryFile()
 
         def draw_fields(can):
-            for field in obj.sandwich_field_model.objects.filter(pdfsandwich_type=self.pdfsandwich_type):
+            for field in self.field_model.objects.filter(pdfsandwich_type=self.pdfsandwich_type):
                 field.draw_on_canvas(can, obj)
             can.save()
         output = self.pdfsandwich_type.build_with_canvas(draw_fields)
