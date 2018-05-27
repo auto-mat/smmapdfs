@@ -34,6 +34,9 @@ class PdfSandwichABC(models.Model):
         default=None,
     )
 
+    def get_pdf_url(self, base_url):
+        return self.pdf.url if self.pdf.url.startswith("https") else base_url + self.pdf.url
+
     def update_pdf(self, obj):
         temp = NamedTemporaryFile()
 

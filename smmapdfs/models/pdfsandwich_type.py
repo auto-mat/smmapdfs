@@ -6,6 +6,7 @@ from io import BytesIO
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 from django.contrib.gis.db import models
+from django.core.validators import FileExtensionValidator
 from django.utils.translation import ugettext_lazy as _
 
 from reportlab.lib.units import mm
@@ -32,8 +33,9 @@ class PdfSandwichType(models.Model):
     template_pdf = models.FileField(
         verbose_name=_("PDF template"),
         upload_to='pdfsandwich_types',
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
+        validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
     )
     height = models.IntegerField(
         verbose_name=_("Height (mm)"),

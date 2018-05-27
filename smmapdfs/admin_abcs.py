@@ -13,9 +13,12 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
         'pdfsandwich_type',
         'pdf',
-        'pdfsandwich_type',
         'sent_time',
     )
+    raw_id_fields = (
+        'obj',
+    )
+
     actions = (smmapdfs.actions.send_pdfsandwich,)
 
 
