@@ -16,7 +16,7 @@ setup(
         version=version,
         author='Timothy Hobbs',
         author_email='timothy.hobbs@auto-mat.cz',
-        url='https://github.com/auto-mat/django-smmapdfs',
+        url='https://github.com/auto-mat/smmapdfs',
         download_url="http://pypi.python.org/pypi/django-smmapdfs/",
         description="Generate PDFs from django models by overlaying text onto an existing pdf",
         long_description=codecs.open(
