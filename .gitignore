@@ -1,0 +1,6 @@
+*.swp
+*.pyc
+build/
+dist/
+*.sqlite3
+django_smmapdfs.egg-info/

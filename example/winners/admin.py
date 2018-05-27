@@ -9,6 +9,7 @@ from related_admin import RelatedFieldAdmin
 
 from . import models
 import smmapdfs.actions
+from smmapdfs.admin_abcs import PdfSandwichAdmin, PdfSandwichFieldAdmin
 
 
 @admin.register(models.Winner)
@@ -16,11 +17,11 @@ class WinnerAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
         'user',
     )
-    actions = smmapdfs.actions.pdfsandwich_actions(models.WinnerSandwich)
+    actions = (smmapdfs.actions.make_pdfsandwich_action,)
 
 
 @admin.register(models.Competition)
-class WinnerAdmin(ImportExportMixin, RelatedFieldAdmin):
+class CompetitionAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
         'name',
         'sandwich_type',
@@ -28,28 +29,9 @@ class WinnerAdmin(ImportExportMixin, RelatedFieldAdmin):
 
 
 @admin.register(models.Certificate)
-class CertificateAdmin(ImportExportMixin, RelatedFieldAdmin):
-    list_display = (
-        'pdfsandwich_type',
-        'pdf',
-        'pdfsandwich_type',
-        'sent_time',
-    )
-    actions = (smmapdfs.actions.send_pdfsandwich,)
-
+class CertificateAdmin(PdfSandwichAdmin):
+    pass
 
 @admin.register(models.CertificateField)
-class CertificateFieldAdmin(ImportExportMixin, RelatedFieldAdmin):
-    list_display = (
-        'field',
-        'x',
-        'y',
-        'font',
-        'font_size',
-    )
-    list_editable = (
-        'x',
-        'y',
-        'font',
-        'font_size',
-    )
+class CertificateFieldAdmin(PdfSandwichFieldAdmin):
+    pass

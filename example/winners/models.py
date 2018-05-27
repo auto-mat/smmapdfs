@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
 
 
 from smmapdfs.models import PdfSandwichType
@@ -9,40 +8,6 @@ from smmapdfs.model_abcs import  PdfSandwichABC, PdfSandwichFieldABC
 from abc import abstractmethod
 
 
-class Competition(models.Model):
-    name = models.CharField(
-        max_length = 80,
-    )
-    sandwich_type = models.ForeignKey(
-        PdfSandwichType,
-        null=False,
-        blank=False,
-        default='',
-        on_delete=models.CASCADE,
-    )
-    def __str__(self):
-        return self.name
-
-
-class Winner(models.Model):
-    user = models.ForeignKey(
-        User,
-        null=False,
-        blank=False,
-        default='',
-        on_delete=models.CASCADE,
-    )
-    competition = models.ForeignKey(
-        Competition,
-        null=False,
-        blank=False,
-        default='',
-        on_delete=models.CASCADE,
-    )
-
-    def __str__(self):
-        return self.user.username
-
 class CertificateField(PdfSandwichFieldABC):
     fields = {"name": (lambda w: w.user.username), "email": (lambda w: w.user.email)}
 
@@ -50,7 +15,7 @@ class CertificateField(PdfSandwichFieldABC):
 class Certificate(PdfSandwichABC):
     field_model = CertificateField
     obj = models.ForeignKey(
-        Winner,
+        'Winner',
         null=False,
         blank=False,
         default='',
@@ -67,11 +32,41 @@ class Certificate(PdfSandwichABC):
         return "en"
 
 
-class WinnerSandwich():
-    sandwich_model = Certificate
+class Winner(models.Model):
+    user = models.ForeignKey(
+        User,
+        null=False,
+        blank=False,
+        default='',
+        on_delete=models.CASCADE,
+    )
+    competition = models.ForeignKey(
+        'Competition',
+        null=False,
+        blank=False,
+        default='',
+        on_delete=models.CASCADE,
+    )
 
+    def __str__(self):
+        return self.user.username
+
+    sandwich_model = Certificate
     sandwich_field_model = CertificateField
 
-    @abstractmethod
-    def get_sandwich_type(winner):
-        return winner.competition.sandwich_type
+    def get_sandwich_type(self):
+        return self.competition.sandwich_type
+
+class Competition(models.Model):
+    name = models.CharField(
+        max_length = 80,
+    )
+    sandwich_type = models.ForeignKey(
+        PdfSandwichType,
+        null=False,
+        blank=False,
+        default='',
+        on_delete=models.CASCADE,
+    )
+    def __str__(self):
+        return self.name
