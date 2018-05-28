@@ -49,7 +49,7 @@ class PdfSandwichType(models.Model):
     def build_with_canvas(self, draw_on_canvas):
         packet = BytesIO()
         for font in PdfSandwichFont.objects.all():
-            pdfmetrics.registerFont(TTFont(font.name, font.ttf.path))
+            pdfmetrics.registerFont(TTFont(font.name, font.ttf.open("r")))
         # create a new PDF with Reportlab
         can = canvas.Canvas(packet, pagesize=(self.height * mm, self.width * mm))
         draw_on_canvas(can)
