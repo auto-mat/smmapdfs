@@ -25,8 +25,8 @@ class Certificate(PdfSandwichABC):
     def get_email(self):
         return self.obj.user.email
 
-    def get_name(self):
-        return self.obj.user.username
+    def get_context(self):
+        return {'name': self.obj.user.username}
 
     def get_language(self):
         return "en"
