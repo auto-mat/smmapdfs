@@ -126,3 +126,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR
 
 SMMAPDFS_CELERY = False
+SMMAPDFS_EMAIL_CONTEXT_HELP = """
+<br/>{{name}} - Name of winner
+"""

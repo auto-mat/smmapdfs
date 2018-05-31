@@ -38,7 +38,7 @@ class EmailForm(forms.ModelForm):
             more_attrs = settings.SMMAPDFS_EMAIL_CONTEXT_HELP
         except AttributeError:
             more_attrs = ""
-        self.fields['template'].help_text = "You can use the following variables in the email context:<br/>{{download_link|safe}} - Url for downlaoding the pdf sandwich\n"
+        self.fields['template'].help_text = "You can use the following variables in the email context:<br/>{{download_link|safe}} - Url for downlaoding the pdf sandwich\n" + more_attrs
 
     class Meta:
         model = models.PdfSandwichEmail

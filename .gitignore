@@ -7,3 +7,4 @@ django_smmapdfs.egg-info/
 /example/pdfsandwich_fonts/
 /example/pdfsandwich_types/
 /example/pdfsandwichs/
+*__pycache__*
