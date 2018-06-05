@@ -20,6 +20,7 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
         'obj',
     )
 
+    list_filter = ('pdfsandwich_type__name',)
     actions = (smmapdfs.actions.send_pdfsandwich,)
 
 
