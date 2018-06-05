@@ -53,11 +53,11 @@ class PdfSandwichFieldABC(models.Model):
         blank=False,
         on_delete=models.CASCADE,
     )
-    x = models.IntegerField(
+    x = models.FloatField(
         verbose_name=_("X (mm)"),
         default=0,
     )
-    y = models.IntegerField(
+    y = models.FloatField(
         verbose_name=_("Y (mm)"),
         default=0,
     )
