@@ -21,7 +21,7 @@ def send_pdfsandwich(pdfsandwich, base_url):
     language = pdfsandwich.get_language()
     email_template = PdfSandwichEmail.objects.get(language=language, pdfsandwich_type=pdfsandwich.pdfsandwich_type)
     django_template = engines['django'].from_string(email_template.template)
-    context = pdfsandwich.get_context()
+    context = pdfsandwich.get_context(base_url=base_url)
     context['download_link'] = pdfsandwich.get_pdf_url(base_url)
     html_message = django_template.render(context)
     # https://stackoverflow.com/questions/9662346/python-code-to-remove-html-tags-from-a-string#12982689
