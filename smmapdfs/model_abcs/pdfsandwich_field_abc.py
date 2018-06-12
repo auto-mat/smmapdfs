@@ -61,6 +61,25 @@ class PdfSandwichFieldABC(models.Model):
         verbose_name=_("Y (mm)"),
         default=0,
     )
+    alignment = models.CharField(
+        verbose_name=_("alignment"),
+        choices=[
+            ('left', 'Left'),
+            ('right', 'Right'),
+            ('center', 'Center'),
+        ],
+        max_length=36,
+        default='left',
+        null=False,
+        blank=False,
+    )
+
     def draw_on_canvas(self, can, obj):
         can.setFont(self.font.name, self.font_size)
-        can.drawString(self.x * mm, self.y * mm, self.fields[self.field](obj))
+
+        if self.alignment == 'center':
+            can.drawCentredString(self.x * mm, self.y * mm, self.fields[self.field](obj))
+        elif self.alignment == 'right':
+            can.drawRightString(self.x * mm, self.y * mm, self.fields[self.field](obj))
+        else:
+            can.drawString(self.x * mm, self.y * mm, self.fields[self.field](obj))

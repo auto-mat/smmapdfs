@@ -31,10 +31,12 @@ class PdfSandwichFieldAdmin(ImportExportMixin, RelatedFieldAdmin):
         'y',
         'font',
         'font_size',
+        'alignment',
     )
     list_editable = (
         'x',
         'y',
         'font',
         'font_size',
+        'alignment',
     )
