@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 from smmapdfs.models import PdfSandwichType
 from smmapdfs.model_abcs import  PdfSandwichABC, PdfSandwichFieldABC
 

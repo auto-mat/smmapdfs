@@ -27,7 +27,6 @@ class PdfSandwichFieldABC(models.Model):
 
     pdfsandwich_type = models.ForeignKey(
         'smmapdfs.PdfSandwichType',
-        related_name="pdfsandwich_fields",
         null=True,
         blank=False,
         default=None,
