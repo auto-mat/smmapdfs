@@ -5,6 +5,12 @@ smmapdfs is used for generating pdf files from django models by overlaying the t
 
 smmapdfs can further be used to send out emails with the pdfs. It was initially intended to send out diplomas at the end of a cycling competition.
 
+Video tutorial:
+---------------
+
+.. image:: ./play.png
+    :target: https://ipfstube.erindachtler.me/v/QmWuK5zvq3h1CHr4P1ZYUQ6HPidF9NYHhmmXzNf5XsVRnU
+
 Integration:
 ------------
 
