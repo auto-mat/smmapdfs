@@ -26,6 +26,7 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
 
 class PdfSandwichFieldAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
+        'pdfsandwich_type',
         'field',
         'x',
         'y',
