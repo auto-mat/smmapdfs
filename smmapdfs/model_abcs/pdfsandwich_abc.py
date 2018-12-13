@@ -48,7 +48,7 @@ class PdfSandwichABC(models.Model):
         output.write(temp)
         filename = "%s/pdfsandwich_%s.pdf" % (
             self.pdfsandwich_type.name,
-            hash(str(self.pk) + settings.SECRET_KEY)
+            uuid.uuid4()
         )
         try:
             self.pdf.delete()
