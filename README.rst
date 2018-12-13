@@ -11,6 +11,13 @@ Video tutorial:
 .. image:: ./play.png
     :target: https://ipfstube.erindachtler.me/v/QmWuK5zvq3h1CHr4P1ZYUQ6HPidF9NYHhmmXzNf5XsVRnU
 
+Instalation:
+------------
+
+Sudo make me a pfd sandwich is published on Pypy as `django-smmapdfs <https://pypi.org/project/django-smmapdfs/>`_.
+
+    pip3 install django-smmapdfs
+
 Integration:
 ------------
 
