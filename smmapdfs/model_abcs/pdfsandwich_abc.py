@@ -9,6 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from reportlab.lib.units import mm
 
+import uuid
+
 
 class PdfSandwichABC(models.Model):
     pdfsandwich_type = models.ForeignKey(
