@@ -2,9 +2,9 @@
 # Copyright (C) 2018 o.s. Auto*Mat
 
 from django.conf import settings
-from django.contrib.gis.db import models
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from reportlab.lib.units import mm

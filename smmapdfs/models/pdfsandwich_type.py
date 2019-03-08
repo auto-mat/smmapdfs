@@ -5,8 +5,8 @@ from io import BytesIO
 
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
-from django.contrib.gis.db import models
 from django.core.validators import FileExtensionValidator
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from reportlab.lib.units import mm

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2016 o.s. Auto*Mat
-from django.contrib.gis.db import models
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 

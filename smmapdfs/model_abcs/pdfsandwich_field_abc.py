@@ -2,8 +2,8 @@
 
 # Copyright (C) 2016 o.s. Auto*Mat
 
-from django.contrib.gis.db import models
 from django.contrib.humanize.templatetags.humanize import intcomma
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from reportlab.lib.units import mm
