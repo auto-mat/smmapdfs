@@ -5,7 +5,8 @@ Install Django dependencies:
 
 .. code-block:: bash
 
-    pip install -r requirements.txt
+    pipenv install
+    pipenv shell
 
 Initialize database tables:
 
