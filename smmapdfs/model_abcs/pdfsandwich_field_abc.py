@@ -36,7 +36,6 @@ class PdfSandwichFieldABC(models.Model):
         verbose_name=_("field"),
         choices=[],
         max_length=36,
-        default=None,
         null=False,
         blank=False,
     )
