@@ -42,7 +42,6 @@ class PdfSandwichEmail(models.Model):
     language = models.CharField(
         verbose_name=_("Language"),
         max_length=80,
-        default=None,
         choices=languages,
         null=False,
         blank=False,

@@ -18,7 +18,6 @@ class PdfSandwichABC(models.Model):
         verbose_name=_("PDF sandwich template/type"),
         null=False,
         blank=False,
-        default='',
         on_delete=models.CASCADE,
     )
 
