@@ -35,17 +35,26 @@ class PdfSandwichABC(models.Model):
         default=None,
     )
 
+    status = models.TextField(
+        verbose_name=_("Status"),
+        blank=True,
+        default='',
+    )
+
     def get_pdf_url(self, base_url):
         return self.pdf.url if self.pdf.url.startswith("https") else base_url + self.pdf.url
+
+    def get_fields(self):
+        return self.field_model.objects.filter(pdfsandwich_type=self.pdfsandwich_type)
 
     def update_pdf(self, obj):
         temp = NamedTemporaryFile()
 
         def draw_fields(can):
-            for field in self.field_model.objects.filter(pdfsandwich_type=self.pdfsandwich_type):
+            for field in self.get_fields():
                 field.draw_on_canvas(can, obj)
             can.save()
-        output = self.pdfsandwich_type.build_with_canvas(draw_fields)
+        output = self.pdfsandwich_type.build_with_canvas(draw_fields, self)
         output.write(temp)
         filename = "%s/pdfsandwich_%s.pdf" % (
             self.pdfsandwich_type.name,
@@ -55,4 +64,5 @@ class PdfSandwichABC(models.Model):
             self.pdf.delete()
         except ValueError:
             pass
-        self.pdf.save(filename, File(temp), save=True)
+        self.pdf.save(filename, File(temp), save=False)
+        self.save()

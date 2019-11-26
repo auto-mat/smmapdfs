@@ -46,10 +46,14 @@ class PdfSandwichType(models.Model):
         default=297,
     )
 
-    def build_with_canvas(self, draw_on_canvas):
+    def build_with_canvas(self, draw_on_canvas, sandwich):
         packet = BytesIO()
-        for font in PdfSandwichFont.objects.all():
-            pdfmetrics.registerFont(TTFont(font.name, font.ttf.open("rb")))
+        for field in sandwich.get_fields():
+            font = field.font
+            try:
+                pdfmetrics.registerFont(TTFont(font.name, font.ttf.open("rb")))
+            except ValueError:
+                sandwich.status += _("\nCorrupt font file for font %s. Font must be a valid TTF file.\n" % font.name)
         # create a new PDF with Reportlab
         can = canvas.Canvas(packet, pagesize=(self.height * mm, self.width * mm))
         draw_on_canvas(can)
@@ -59,6 +63,9 @@ class PdfSandwichType(models.Model):
         output = PdfFileWriter()
         background_pdf = PdfFileReader(self.template_pdf, strict=False)
         page = background_pdf.getPage(0)
-        page.mergePage(new_pdf.getPage(0))
+        try:
+            page.mergePage(new_pdf.getPage(0))
+        except IndexError:
+            sandwich.status += _("\nNo fields rendered.\n")
         output.addPage(page)
         return output
