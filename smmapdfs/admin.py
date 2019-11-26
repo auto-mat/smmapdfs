@@ -67,7 +67,7 @@ class PdfSandwichAdminMixin(ImportExportMixin, RelatedFieldAdmin):
 
 
 @admin.register(models.PdfSandwichFont)
-class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
+class PdfSandwichFontAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
         'name',
         'ttf',
