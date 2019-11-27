@@ -14,7 +14,6 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont, TTFError
 from reportlab.pdfgen import canvas
 
-from .pdfsandwich_font import PdfSandwichFont
 
 def normpath(*args):
     return os.path.normpath(os.path.abspath(os.path.join(*args)))
