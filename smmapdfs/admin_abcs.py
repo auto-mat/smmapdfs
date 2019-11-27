@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2016 o.s. Auto*Mat
+from django import forms
 from django.contrib import admin
 
 from import_export.admin import ImportExportMixin
@@ -14,14 +15,32 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
         'obj',
         'pdfsandwich_type',
         'pdf',
+        'status',
         'sent_time',
     )
     raw_id_fields = (
         'obj',
     )
+    readonly_fields = (
+        'status',
+    )
 
     list_filter = ('pdfsandwich_type__name',)
     actions = (smmapdfs.actions.send_pdfsandwich,)
+
+
+def fieldForm(form_model):
+    class _FieldForm(forms.ModelForm):
+        class Meta:
+            model = form_model
+            exclude = (
+                'site_of_origin',
+            )
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['field'].widget = forms.Select(choices=self._meta.model.get_field_choices())
+    return _FieldForm
 
 
 class PdfSandwichFieldAdmin(ImportExportMixin, RelatedFieldAdmin):

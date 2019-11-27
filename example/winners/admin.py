@@ -9,7 +9,7 @@ from related_admin import RelatedFieldAdmin
 
 from . import models
 import smmapdfs.actions
-from smmapdfs.admin_abcs import PdfSandwichAdmin, PdfSandwichFieldAdmin
+from smmapdfs.admin_abcs import PdfSandwichAdmin, PdfSandwichFieldAdmin, fieldForm
 
 
 @admin.register(models.Winner)
@@ -34,4 +34,4 @@ class CertificateAdmin(PdfSandwichAdmin):
 
 @admin.register(models.CertificateField)
 class CertificateFieldAdmin(PdfSandwichFieldAdmin):
-    pass
+    form = fieldForm(models.CertificateField)

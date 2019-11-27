@@ -48,6 +48,7 @@ class PdfSandwichABC(models.Model):
         return self.field_model.objects.filter(pdfsandwich_type=self.pdfsandwich_type)
 
     def update_pdf(self, obj):
+        self.status = ""
         temp = NamedTemporaryFile()
 
         def draw_fields(can):

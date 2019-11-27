@@ -14,7 +14,7 @@ class PdfSandwichFieldABC(models.Model):
         abstract = True
         def __new__(cls, clsname, bases, dct):
             res = type.__new__(cls, clsname, bases, dct)
-            cls.field.choices = [(a, a) for a in cls.fields.keys()]
+            cls.field.choices = cls.get_field_choices()
             return res
 
     def __str__(self):
@@ -23,7 +23,11 @@ class PdfSandwichFieldABC(models.Model):
     def __init__(self, *args, **kwargs):
         # https://stackoverflow.com/questions/6001986/dynamic-choices-field-in-django-models
         super().__init__(*args, **kwargs)
-        self._meta.get_field('field').choices = [(a, a) for a in self.fields.keys()]
+        self._meta.get_field('field').choices = self.get_field_choices()
+
+    @classmethod
+    def get_field_choices(cls):
+        return [(a, a) for a in cls.fields.keys()]
 
     pdfsandwich_type = models.ForeignKey(
         'smmapdfs.PdfSandwichType',

@@ -7,11 +7,11 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 
 from django.core.validators import FileExtensionValidator
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase.ttfonts import TTFont, TTFError
 from reportlab.pdfgen import canvas
 
 from .pdfsandwich_font import PdfSandwichFont
@@ -48,19 +48,23 @@ class PdfSandwichType(models.Model):
 
     def build_with_canvas(self, draw_on_canvas, sandwich):
         packet = BytesIO()
+        fonts = {}
+        output = PdfFileWriter()
         for field in sandwich.get_fields():
-            font = field.font
+            fonts[field.font.pk] = field.font
+
+        for font in fonts.values():
             try:
                 pdfmetrics.registerFont(TTFont(font.name, font.ttf.open("rb")))
-            except ValueError:
-                sandwich.status += _("\nCorrupt font file for font %s. Font must be a valid TTF file.\n" % font.name)
+            except (ValueError, TTFError):
+                sandwich.status += _("\nCorrupt font file for font '%s'. Font must be a valid TTF file.\n" % font.name)
+                return output
         # create a new PDF with Reportlab
         can = canvas.Canvas(packet, pagesize=(self.height * mm, self.width * mm))
         draw_on_canvas(can)
         # move to the beginning of the StringIO buffer
         packet.seek(0)
         new_pdf = PdfFileReader(packet)
-        output = PdfFileWriter()
         background_pdf = PdfFileReader(self.template_pdf, strict=False)
         page = background_pdf.getPage(0)
         try:

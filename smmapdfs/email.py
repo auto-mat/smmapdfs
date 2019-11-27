@@ -27,6 +27,14 @@ def send_pdfsandwich(pdfsandwich, base_url):
     # https://stackoverflow.com/questions/9662346/python-code-to-remove-html-tags-from-a-string#12982689
     cleanr = re.compile('<.*?>')
     message = re.sub(cleanr, '', html_message)
-    send_mail(email_template.subject, message, None, [pdfsandwich.get_email()], fail_silently=False, html_message=html_message)
+    send_mail(
+        email_template.subject,
+        message,
+        None,
+        [pdfsandwich.get_email()],
+        fail_silently=False,
+        html_message=html_message,
+        attachments=pdfsandwich.pdf,
+    )
     pdfsandwich.sent_time = datetime.now()
     pdfsandwich.save()
