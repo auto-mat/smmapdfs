@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2018 o.s. Auto*Mat
 import re
+from os.path import basename
 from datetime import datetime
 
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.template import engines
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.shortcuts import get_current_site
@@ -27,14 +28,16 @@ def send_pdfsandwich(pdfsandwich, base_url):
     # https://stackoverflow.com/questions/9662346/python-code-to-remove-html-tags-from-a-string#12982689
     cleanr = re.compile('<.*?>')
     message = re.sub(cleanr, '', html_message)
-    send_mail(
-        email_template.subject,
-        message,
-        None,
-        [pdfsandwich.get_email()],
-        fail_silently=False,
-        html_message=html_message,
-        attachments=pdfsandwich.pdf,
+    email = EmailMultiAlternatives(
+        subject=email_template.subject,
+        body=message,
+        from_email=None,
+        to=[pdfsandwich.get_email()],
     )
+    pdf = pdfsandwich.pdf
+    pdf.open()
+    email.attach(basename(pdf.name), pdf.read(), "application/pdf")
+    email.attach_alternative(html_message, "text/html")
+    email.send()
     pdfsandwich.sent_time = datetime.now()
     pdfsandwich.save()
