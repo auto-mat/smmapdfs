@@ -2,11 +2,14 @@
 
 # Copyright (C) 2016 o.s. Auto*Mat
 
+from colorfield.fields import ColorField
+
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from reportlab.lib.units import mm
+from reportlab.lib import colors
 
 
 class PdfSandwichFieldABC(models.Model):
@@ -75,9 +78,13 @@ class PdfSandwichFieldABC(models.Model):
         null=False,
         blank=False,
     )
+    stroke_color = ColorField(default="#000000")
+    fill_color = ColorField(default="#000000")
 
     def draw_on_canvas(self, can, obj):
         can.setFont(self.font.name, self.font_size)
+        can.setStrokeColor(colors.HexColor(self.stroke_color))
+        can.setFillColor(colors.HexColor(self.fill_color))
 
         if self.alignment == 'center':
             can.drawCentredString(self.x * mm, self.y * mm, self.fields[self.field](obj))
