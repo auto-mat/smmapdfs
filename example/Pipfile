@@ -10,6 +10,7 @@ Django = ">=2"
 "PyPDF2" = "*"
 "django-related-admin" = "*"
 "django-celery" = "*"
+"django-colorfield" = "*"
 
 [requires]
 python_version = "3.5"
