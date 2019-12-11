@@ -61,3 +61,7 @@ class PdfSandwichFieldAdmin(ImportExportMixin, RelatedFieldAdmin):
         'font_size',
         'alignment',
     )
+
+    list_filter = (
+        'pdfsandwich_type__name',
+    )
