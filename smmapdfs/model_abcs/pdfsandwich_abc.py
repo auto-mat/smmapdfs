@@ -47,6 +47,12 @@ class PdfSandwichABC(models.Model):
     def get_fields(self):
         return self.field_model.objects.filter(pdfsandwich_type=self.pdfsandwich_type)
 
+    def get_context(self, base_url):
+        context = {}
+        for name, field in self.field_model.fields.items():
+            context[name] = field(self.obj)
+        return context
+
     def update_pdf(self, obj):
         self.status = ""
         temp = NamedTemporaryFile()
