@@ -10,6 +10,7 @@ from related_admin import RelatedFieldAdmin
 from . import models
 import smmapdfs.actions
 
+
 class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
         'obj',
@@ -22,12 +23,18 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
         'obj',
     )
     readonly_fields = (
+        'obj',
+        'pdfsandwich_type',
+        'pdf',
         'status',
+        'sent_time',
     )
 
     list_filter = ('pdfsandwich_type__name',)
     actions = (smmapdfs.actions.send_pdfsandwich,)
 
+    def has_add_permission(self, request, obj=None):
+        return False
 
 def fieldForm(form_model):
     class _FieldForm(forms.ModelForm):
