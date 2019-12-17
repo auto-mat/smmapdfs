@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'winners',
     'smmapdfs',
     'import_export',
+    'colorfield'
 ]
 
 MIDDLEWARE = [
