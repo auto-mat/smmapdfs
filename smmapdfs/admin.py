@@ -12,15 +12,6 @@ from . import actions
 from . import models
 
 
-@admin.register(models.PdfSandwichType)
-class PdfSandwichTypeAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = (
-        'name',
-        'height',
-        'width',
-    )
-
-
 class PdfSandwichFieldAdminMixin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
         'field',
@@ -52,6 +43,22 @@ class PdfSandwichEmailAdmin(ImportExportMixin, RelatedFieldAdmin):
         'pdfsandwich_type',
         'language',
     )
+
+
+class PdfSandwichEmailAdminInline(admin.TabularInline):
+    model = models.PdfSandwichEmail
+    form = EmailForm
+    extra = 0
+
+
+@admin.register(models.PdfSandwichType)
+class PdfSandwichTypeAdmin(ImportExportMixin, admin.ModelAdmin):
+    list_display = (
+        'name',
+        'height',
+        'width',
+    )
+    inlines = [PdfSandwichEmailAdminInline,]
 
 
 class PdfSandwichAdminMixin(ImportExportMixin, RelatedFieldAdmin):
