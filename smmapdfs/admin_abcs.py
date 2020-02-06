@@ -17,6 +17,7 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
         'pdfsandwich_type',
         'pdf',
         'status',
+        'recipient',
         'sent_time',
     )
     raw_id_fields = (
@@ -35,6 +36,12 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
 
     def has_add_permission(self, request, obj=None):
         return False
+
+    def recipient(self, obj):
+        try:
+            return obj.get_email()
+        except AttributeError:
+            return "-"
 
 def fieldForm(form_model):
     class _FieldForm(forms.ModelForm):
