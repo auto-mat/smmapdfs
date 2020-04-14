@@ -23,7 +23,6 @@ setup(
                 here, 'README.rst'), 'r', 'utf-8').read(),
         license='LPGL, see LICENSE file.',
         install_requires=[
-                'requires',
                 'django-colorfield',
         ],
         packages=find_packages(),
