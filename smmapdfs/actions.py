@@ -28,7 +28,7 @@ def make_pdfsandwich_task(app_label, obj_model, obj_pk):
         object_model = ContentType.objects.get(app_label=app_label, model=obj_model)
     except ContentType.DoesNotExist:
         # https://stackoverflow.com/questions/29193141/contenttype-matching-query-does-not-exist-only-on-sqlite-not-mysql
-        object_model = ContentType.objects.get(app_label=app_label, model=origin_model.lower())
+        object_model = ContentType.objects.get(app_label=app_label, model=obj_model.lower())
     obj = object_model.get_object_for_this_type(pk=obj_pk)
     sandwich, _ = obj.sandwich_model.objects.get_or_create(
         obj=obj,
