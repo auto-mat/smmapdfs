@@ -31,7 +31,10 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
         'sent_time',
     )
 
-    list_filter = ('pdfsandwich_type__name',)
+    list_filter = (
+        'pdfsandwich_type__name',
+        'sent_time',
+    )
     actions = (smmapdfs.actions.send_pdfsandwich,)
 
     def has_add_permission(self, request, obj=None):
