@@ -17,7 +17,10 @@ class WinnerAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
         'user',
     )
-    actions = (smmapdfs.actions.make_pdfsandwich,)
+    actions = (
+        smmapdfs.actions.make_pdfsandwich,
+        smmapdfs.actions.make_and_send_pdfsandwich,
+    )
 
 
 @admin.register(models.Competition)
