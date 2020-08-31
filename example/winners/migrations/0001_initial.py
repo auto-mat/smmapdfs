@@ -10,53 +10,142 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('smmapdfs', '0002_auto_20180611_1830'),
+        ("smmapdfs", "0002_auto_20180611_1830"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Certificate',
+            name="Certificate",
             fields=[
-                ('pdfsandwichabc_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='smmapdfs.PdfSandwichABC')),
+                (
+                    "pdfsandwichabc_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="smmapdfs.PdfSandwichABC",
+                    ),
+                ),
             ],
-            bases=('smmapdfs.pdfsandwichabc',),
+            bases=("smmapdfs.pdfsandwichabc",),
         ),
         migrations.CreateModel(
-            name='CertificateField',
+            name="CertificateField",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('field', models.CharField(default=None, max_length=36, verbose_name='field')),
-                ('font_size', models.IntegerField(default=16, verbose_name='Font size')),
-                ('x', models.FloatField(default=0, verbose_name='X (mm)')),
-                ('y', models.FloatField(default=0, verbose_name='Y (mm)')),
-                ('alignment', models.CharField(choices=[('left', 'Left'), ('right', 'Right'), ('center', 'Center')], default='left', max_length=36, verbose_name='alignment')),
-                ('font', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='smmapdfs.PdfSandwichFont')),
-                ('pdfsandwich_type', models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to='smmapdfs.PdfSandwichType')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "field",
+                    models.CharField(default=None, max_length=36, verbose_name="field"),
+                ),
+                (
+                    "font_size",
+                    models.IntegerField(default=16, verbose_name="Font size"),
+                ),
+                ("x", models.FloatField(default=0, verbose_name="X (mm)")),
+                ("y", models.FloatField(default=0, verbose_name="Y (mm)")),
+                (
+                    "alignment",
+                    models.CharField(
+                        choices=[
+                            ("left", "Left"),
+                            ("right", "Right"),
+                            ("center", "Center"),
+                        ],
+                        default="left",
+                        max_length=36,
+                        verbose_name="alignment",
+                    ),
+                ),
+                (
+                    "font",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="smmapdfs.PdfSandwichFont",
+                    ),
+                ),
+                (
+                    "pdfsandwich_type",
+                    models.ForeignKey(
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="smmapdfs.PdfSandwichType",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='Competition',
+            name="Competition",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=80)),
-                ('sandwich_type', models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='smmapdfs.PdfSandwichType')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=80)),
+                (
+                    "sandwich_type",
+                    models.ForeignKey(
+                        default="",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="smmapdfs.PdfSandwichType",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Winner',
+            name="Winner",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('competition', models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='winners.Competition')),
-                ('user', models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "competition",
+                    models.ForeignKey(
+                        default="",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="winners.Competition",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        default="",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='certificate',
-            name='obj',
-            field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='winners.Winner'),
+            model_name="certificate",
+            name="obj",
+            field=models.ForeignKey(
+                default="",
+                on_delete=django.db.models.deletion.CASCADE,
+                to="winners.Winner",
+            ),
         ),
     ]

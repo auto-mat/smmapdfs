@@ -13,27 +13,25 @@ import smmapdfs.actions
 
 class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
-        'obj',
-        'pdfsandwich_type',
-        'pdf',
-        'status',
-        'recipient',
-        'sent_time',
+        "obj",
+        "pdfsandwich_type",
+        "pdf",
+        "status",
+        "recipient",
+        "sent_time",
     )
-    raw_id_fields = (
-        'obj',
-    )
+    raw_id_fields = ("obj",)
     readonly_fields = (
-        'obj',
-        'pdfsandwich_type',
-        'pdf',
-        'status',
-        'sent_time',
+        "obj",
+        "pdfsandwich_type",
+        "pdf",
+        "status",
+        "sent_time",
     )
 
     list_filter = (
-        'pdfsandwich_type__name',
-        'sent_time',
+        "pdfsandwich_type__name",
+        "sent_time",
     )
     actions = (smmapdfs.actions.send_pdfsandwich,)
 
@@ -46,39 +44,39 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
         except AttributeError:
             return "-"
 
+
 def fieldForm(form_model):
     class _FieldForm(forms.ModelForm):
         class Meta:
             model = form_model
-            exclude = (
-                'site_of_origin',
-            )
+            exclude = ("site_of_origin",)
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
-            self.fields['field'].widget = forms.Select(choices=self._meta.model.get_field_choices())
+            self.fields["field"].widget = forms.Select(
+                choices=self._meta.model.get_field_choices()
+            )
+
     return _FieldForm
 
 
 class PdfSandwichFieldAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
-        'id',
-        'pdfsandwich_type',
-        'field',
-        'x',
-        'y',
-        'font',
-        'font_size',
-        'alignment',
+        "id",
+        "pdfsandwich_type",
+        "field",
+        "x",
+        "y",
+        "font",
+        "font_size",
+        "alignment",
     )
     list_editable = (
-        'x',
-        'y',
-        'font',
-        'font_size',
-        'alignment',
+        "x",
+        "y",
+        "font",
+        "font_size",
+        "alignment",
     )
 
-    list_filter = (
-        'pdfsandwich_type__name',
-    )
+    list_filter = ("pdfsandwich_type__name",)

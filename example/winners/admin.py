@@ -12,11 +12,10 @@ from smmapdfs.admin import PdfSandwichTypeAdmin
 from smmapdfs.admin_abcs import PdfSandwichAdmin, PdfSandwichFieldAdmin, fieldForm
 from smmapdfs.models import PdfSandwichType
 
+
 @admin.register(models.Winner)
 class WinnerAdmin(ImportExportMixin, RelatedFieldAdmin):
-    list_display = (
-        'user',
-    )
+    list_display = ("user",)
     actions = (
         smmapdfs.actions.make_pdfsandwich,
         smmapdfs.actions.make_and_send_pdfsandwich,
@@ -26,8 +25,8 @@ class WinnerAdmin(ImportExportMixin, RelatedFieldAdmin):
 @admin.register(models.Competition)
 class CompetitionAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
-        'name',
-        'sandwich_type',
+        "name",
+        "sandwich_type",
     )
 
 
@@ -42,13 +41,18 @@ class CertificateFieldAdmin(PdfSandwichFieldAdmin):
 
 
 """ this is optional just for better admin view """
+
+
 class CertificateFieldInline(admin.TabularInline):
     model = models.CertificateField
     can_delete = True
     extra = 0
 
+
 admin.site.unregister(models.CertificateField)
 admin.site.unregister(models.PdfSandwichType)
+
+
 @admin.register(models.PdfSandwichType)
 class _PdfSandwichTypeAdmin(PdfSandwichTypeAdmin):
     inlines = (CertificateFieldInline,)

@@ -31,7 +31,7 @@ class PdfSandwichEmail(models.Model):
         return self.subject
 
     pdfsandwich_type = models.ForeignKey(
-        'PdfSandwichType',
+        "PdfSandwichType",
         related_name="pdfsandwich_emails",
         null=True,
         blank=False,
@@ -48,10 +48,7 @@ class PdfSandwichEmail(models.Model):
     )
 
     subject = models.CharField(
-        verbose_name=_("Subject"),
-        max_length=512,
-        blank=False,
-        null=False,
+        verbose_name=_("Subject"), max_length=512, blank=False, null=False,
     )
 
     template = models.TextField(

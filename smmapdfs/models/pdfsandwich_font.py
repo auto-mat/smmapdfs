@@ -9,14 +9,8 @@ class PdfSandwichFont(models.Model):
         return self.name
 
     name = models.CharField(
-        verbose_name=_("Font name"),
-        max_length=20,
-        blank=False,
-        null=False,
+        verbose_name=_("Font name"), max_length=20, blank=False, null=False,
     )
     ttf = models.FileField(
-        verbose_name=_("Font"),
-        upload_to='pdfsandwich_fonts',
-        blank=False,
-        null=False,
+        verbose_name=_("Font"), upload_to="pdfsandwich_fonts", blank=False, null=False,
     )

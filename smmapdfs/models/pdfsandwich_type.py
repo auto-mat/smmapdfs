@@ -24,26 +24,17 @@ class PdfSandwichType(models.Model):
         return self.name
 
     name = models.CharField(
-        verbose_name=_("Template name"),
-        max_length=20,
-        blank=False,
-        null=False,
+        verbose_name=_("Template name"), max_length=20, blank=False, null=False,
     )
     template_pdf = models.FileField(
         verbose_name=_("PDF template"),
-        upload_to='pdfsandwich_types',
+        upload_to="pdfsandwich_types",
         blank=False,
         null=False,
-        validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
+        validators=[FileExtensionValidator(allowed_extensions=["pdf"])],
     )
-    height = models.IntegerField(
-        verbose_name=_("Height (mm)"),
-        default=210,
-    )
-    width = models.IntegerField(
-        verbose_name=_("Width (mm)"),
-        default=297,
-    )
+    height = models.IntegerField(verbose_name=_("Height (mm)"), default=210,)
+    width = models.IntegerField(verbose_name=_("Width (mm)"), default=297,)
 
     def build_with_canvas(self, draw_on_canvas, sandwich):
         packet = BytesIO()
@@ -56,7 +47,10 @@ class PdfSandwichType(models.Model):
             try:
                 pdfmetrics.registerFont(TTFont(font.name, font.ttf.open("rb")))
             except (ValueError, TTFError):
-                sandwich.status += _("\nCorrupt font file for font '%s'. Font must be a valid TTF file.\n" % font.name)
+                sandwich.status += _(
+                    "\nCorrupt font file for font '%s'. Font must be a valid TTF file.\n"
+                    % font.name
+                )
                 return output
         # create a new PDF with Reportlab
         can = canvas.Canvas(packet, pagesize=(self.height * mm, self.width * mm))

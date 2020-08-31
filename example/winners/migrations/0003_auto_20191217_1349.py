@@ -7,23 +7,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('winners', '0002_auto_20191127_1559'),
+        ("winners", "0002_auto_20191127_1559"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='certificatefield',
-            name='fill_color',
-            field=colorfield.fields.ColorField(default='#000000', max_length=18),
+            model_name="certificatefield",
+            name="fill_color",
+            field=colorfield.fields.ColorField(default="#000000", max_length=18),
         ),
         migrations.AddField(
-            model_name='certificatefield',
-            name='stroke_color',
-            field=colorfield.fields.ColorField(default='#000000', max_length=18),
+            model_name="certificatefield",
+            name="stroke_color",
+            field=colorfield.fields.ColorField(default="#000000", max_length=18),
         ),
         migrations.AlterField(
-            model_name='certificatefield',
-            name='field',
-            field=models.CharField(choices=[], max_length=36, verbose_name='field'),
+            model_name="certificatefield",
+            name="field",
+            field=models.CharField(choices=[], max_length=36, verbose_name="field"),
         ),
     ]

@@ -13,21 +13,21 @@ from .models import PdfSandwichEmail
 
 
 def get_base_url(request):
-    return '%s://%s' % (
-        request.scheme,
-        request.META['HTTP_HOST'],
-    )
+    return "%s://%s" % (request.scheme, request.META["HTTP_HOST"],)
+
 
 def send_pdfsandwich(pdfsandwich, base_url):
     language = pdfsandwich.get_language()
-    email_template = PdfSandwichEmail.objects.get(language=language, pdfsandwich_type=pdfsandwich.pdfsandwich_type)
-    django_template = engines['django'].from_string(email_template.template)
+    email_template = PdfSandwichEmail.objects.get(
+        language=language, pdfsandwich_type=pdfsandwich.pdfsandwich_type
+    )
+    django_template = engines["django"].from_string(email_template.template)
     context = pdfsandwich.get_context(base_url=base_url)
-    context['download_link'] = pdfsandwich.get_pdf_url(base_url)
+    context["download_link"] = pdfsandwich.get_pdf_url(base_url)
     html_message = django_template.render(context)
     # https://stackoverflow.com/questions/9662346/python-code-to-remove-html-tags-from-a-string#12982689
-    cleanr = re.compile('<.*?>')
-    message = re.sub(cleanr, '', html_message)
+    cleanr = re.compile("<.*?>")
+    message = re.sub(cleanr, "", html_message)
     email = EmailMultiAlternatives(
         subject=email_template.subject,
         body=message,

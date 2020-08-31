@@ -14,12 +14,12 @@ from . import models
 
 class PdfSandwichFieldAdminMixin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
-        'field',
-        'x',
-        'y',
-        'pdfsandwich_type',
+        "field",
+        "x",
+        "y",
+        "pdfsandwich_type",
     )
-    list_editable = ('x', 'y', 'pdfsandwich_type')
+    list_editable = ("x", "y", "pdfsandwich_type")
 
 
 class EmailForm(forms.ModelForm):
@@ -29,7 +29,10 @@ class EmailForm(forms.ModelForm):
             more_attrs = settings.SMMAPDFS_EMAIL_CONTEXT_HELP
         except AttributeError:
             more_attrs = ""
-        self.fields['template'].help_text = "You can use the following variables in the email context:<br/>{{download_link|safe}} - Url for downlaoding the pdf sandwich\n" + more_attrs
+        self.fields["template"].help_text = (
+            "You can use the following variables in the email context:<br/>{{download_link|safe}} - Url for downlaoding the pdf sandwich\n"
+            + more_attrs
+        )
 
     class Meta:
         model = models.PdfSandwichEmail
@@ -40,8 +43,8 @@ class EmailForm(forms.ModelForm):
 class PdfSandwichEmailAdmin(ImportExportMixin, RelatedFieldAdmin):
     form = EmailForm
     list_display = (
-        'pdfsandwich_type',
-        'language',
+        "pdfsandwich_type",
+        "language",
     )
 
 
@@ -54,28 +57,28 @@ class PdfSandwichEmailAdminInline(admin.TabularInline):
 @admin.register(models.PdfSandwichType)
 class PdfSandwichTypeAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = (
-        'name',
-        'height',
-        'width',
+        "name",
+        "height",
+        "width",
     )
-    inlines = [PdfSandwichEmailAdminInline,]
+    inlines = [
+        PdfSandwichEmailAdminInline,
+    ]
 
 
 class PdfSandwichAdminMixin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
-        'obj',
-        'pdfsandwich_type',
-        'pdf',
-        'sent_time',
+        "obj",
+        "pdfsandwich_type",
+        "pdf",
+        "sent_time",
     )
-    actions = (
-        actions.send_pdfsandwich,
-    )
+    actions = (actions.send_pdfsandwich,)
 
 
 @admin.register(models.PdfSandwichFont)
 class PdfSandwichFontAdmin(ImportExportMixin, RelatedFieldAdmin):
     list_display = (
-        'name',
-        'ttf',
+        "name",
+        "ttf",
     )

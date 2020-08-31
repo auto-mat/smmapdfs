@@ -7,14 +7,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('smmapdfs', '0001_initial'),
+        ("smmapdfs", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='pdfsandwichtype',
-            name='template_pdf',
-            field=models.FileField(default=None, upload_to='pdfsandwich_types', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name='PDF template'),
+            model_name="pdfsandwichtype",
+            name="template_pdf",
+            field=models.FileField(
+                default=None,
+                upload_to="pdfsandwich_types",
+                validators=[
+                    django.core.validators.FileExtensionValidator(
+                        allowed_extensions=["pdf"]
+                    )
+                ],
+                verbose_name="PDF template",
+            ),
             preserve_default=False,
         ),
     ]
