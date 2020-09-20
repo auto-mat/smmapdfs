@@ -22,7 +22,10 @@ setup(
     description="Generate PDFs from django models by overlaying text onto an existing pdf",
     long_description=codecs.open(os.path.join(here, "README.rst"), "r", "utf-8").read(),
     license="LPGL, see LICENSE file.",
-    install_requires=["django-colorfield",],
+    install_requires=[
+        "django-colorfield",
+        "django-fieldsets-with-inlines",
+    ],
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
