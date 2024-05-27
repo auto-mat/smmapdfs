@@ -6,7 +6,7 @@ from colorfield.fields import ColorField
 
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from reportlab.lib.units import mm
 from reportlab.lib import colors

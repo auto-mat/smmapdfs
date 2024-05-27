@@ -6,7 +6,7 @@ from datetime import datetime
 
 from django.core.mail import EmailMultiAlternatives
 from django.template import engines
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.sites.shortcuts import get_current_site
 
 from .models import PdfSandwichEmail
