@@ -7,7 +7,7 @@ from PyPDF2 import PdfFileReader, PdfFileWriter
 
 from django.core.validators import FileExtensionValidator
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
