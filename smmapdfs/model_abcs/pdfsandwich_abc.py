@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from reportlab.lib.units import mm
 
