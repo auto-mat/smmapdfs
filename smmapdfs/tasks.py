@@ -1,11 +1,11 @@
-from celery import task
+from celery import shared_task
 
 from django.contrib.contenttypes.models import ContentType
 
 from . import email
 
 
-@task()
+@shared_task()
 def make_pdfsandwich(app_label, obj_model, obj_pk, continuation=None):
     try:
         object_model = ContentType.objects.get(app_label=app_label, model=obj_model)
@@ -24,7 +24,7 @@ def make_pdfsandwich(app_label, obj_model, obj_pk, continuation=None):
         continuation(sandwich)
 
 
-@task()
+@shared_task()
 def send_pdfsandwich(app_label, model, pk, base_url):
     sandwich = ContentType.objects.get(
         app_label=app_label, model=model
