@@ -40,7 +40,7 @@ class PdfSandwichAdmin(ImportExportMixin, RelatedFieldAdmin):
 
     def recipient(self, obj):
         try:
-            return obj.get_email()
+            return ", ".join(obj.get_email())
         except AttributeError:
             return "-"
 
