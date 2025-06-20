@@ -32,7 +32,7 @@ def send_pdfsandwich(pdfsandwich, base_url):
         subject=email_template.subject,
         body=message,
         from_email=None,
-        to=[pdfsandwich.get_email()],
+        to=pdfsandwich.get_email(),
     )
     pdf = pdfsandwich.pdf
     pdf.open()
