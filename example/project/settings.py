@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "smmapdfs",
     "import_export",
     "colorfield",
+    'fieldsets_with_inlines',
 ]
 
 MIDDLEWARE = [

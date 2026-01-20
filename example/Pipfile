@@ -1,18 +1,26 @@
 [[source]]
+
 url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+
 [packages]
+
 reportlab = "*"
 django-import-export = "*"
-Django = ">=2"
-"PyPDF2" = "*"
-"django-related-admin" = "*"
-"django-celery" = "*"
-"django-colorfield" = "*"
+django = ">=2"
+"pypdf2" = "*"
+django-related-admin = "*"
+django-celery = "*"
+django-colorfield = "*"
+django-fieldsets-with-inlines = "*"
+
 
 [requires]
+
 python_version = "3.5"
 
+
 [dev-packages]
+
