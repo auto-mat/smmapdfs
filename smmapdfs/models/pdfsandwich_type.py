@@ -3,7 +3,7 @@
 import os
 from io import BytesIO
 
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader, PdfWriter
 
 from django.core.validators import FileExtensionValidator
 from django.db import models
@@ -39,7 +39,7 @@ class PdfSandwichType(models.Model):
     def build_with_canvas(self, draw_on_canvas, sandwich):
         packet = BytesIO()
         fonts = {}
-        output = PdfFileWriter()
+        output = PdfWriter()
         for field in sandwich.get_fields():
             fonts[field.font.pk] = field.font
 
@@ -57,12 +57,12 @@ class PdfSandwichType(models.Model):
         draw_on_canvas(can)
         # move to the beginning of the StringIO buffer
         packet.seek(0)
-        new_pdf = PdfFileReader(packet)
-        background_pdf = PdfFileReader(self.template_pdf, strict=False)
-        page = background_pdf.getPage(0)
+        new_pdf = PdfReader(packet)
+        background_pdf = PdfReader(self.template_pdf, strict=False)
+        page = background_pdf.pages[0]
         try:
-            page.mergePage(new_pdf.getPage(0))
+            page.merge_page(new_pdf.pages[0])
         except IndexError:
             sandwich.status += _("\nNo fields rendered.\n")
-        output.addPage(page)
+        output.add_page(page)
         return output
